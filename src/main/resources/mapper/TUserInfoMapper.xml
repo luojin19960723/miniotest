@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.minio.mapper.TUserInfoMapper">
+
+    <select id="selectUserById" parameterType="java.lang.Integer" resultType="com.example.minio.dto.UserInfoDTO">
+
+        SELECT u.*,
+               i.bucket AS imageBucket,
+               i.object AS imageObject,
+               c.bucket AS contractBucket,
+               c.object AS contractObject
+        FROM t_user_info u
+                 LEFT JOIN
+             t_user_image i ON u.id = i.uid
+                 LEFT JOIN
+             t_user_contract c ON u.id = c.uid
+        WHERE u.id = #{id}
+
+
+    </select>
+
+</mapper>
